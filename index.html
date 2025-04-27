@@ -234,6 +234,25 @@
         @keyframes pulse { 0%{transform:scale(1);}50%{transform:scale(1.1);}100%{transform:scale(1);} }
         .confetti { position:absolute; width:10px; height:10px; background:#fd0; animation:confetti-fall 5s linear forwards; }
         @keyframes confetti-fall { 0%{transform:translateY(-100vh) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;} }
+
+            /* at the bottom of your <style> */
+        @media (max-width: 600px) {
+        .music-controls {
+            width: 50px;
+            height: 50px;
+            top: 15px;
+            right: 15px;
+        }
+        .music-controls svg {
+            width: 28px;
+            height: 28px;
+        }
+        .btn {
+            padding: 14px 20px;
+            font-size: 16px;
+        }
+        }
+        
     </style>
 </head>
 <body>
@@ -384,7 +403,7 @@
     <div class="page" id="page-9">
         <div class="final-card">
             <div class="heart">❤️</div>
-            <div class="birthday-wish">HAPPY BIRTHDAY Ishaa! 🎉</div>
+            <div class="birthday-wish">HAPPY BIRTHDAY ISHAA! 🎉</div>
             <div class="message">Thanks for being the most fun, wild, and wonderful person in my life. Every day with you is like drawing the perfect card!</div>
             <div class="signature">ILYSM 💜</div>
             <div class="button-container" style="margin-top:20px;"><button class="btn" onclick="startCelebration()">🎉 Celebrate! 🎉</button><button class="btn" onclick="navigateTo(1)">Start Over</button></div>
@@ -450,6 +469,10 @@
         // Music controls (unchanged)
         const bgMusic=document.getElementById('bgMusic'), musicToggle=document.getElementById('musicToggle'); let isPlaying=false;
         musicToggle.addEventListener('click',toggleMusic);
+        musicToggle.addEventListener('touchstart', e => {
+            e.preventDefault();      // prevent the synthetic click
+            toggleMusic();
+        });
         function toggleMusic(){ isPlaying?bgMusic.pause():bgMusic.play(); isPlaying=!isPlaying; }
         const songs=[{title:"Tum Mile",artist:"Your Favourite",src:"Background_Music.mp3"}]; let currentSongIndex=0;
         function previousSong(){ currentSongIndex=(currentSongIndex-1+songs.length)%songs.length; updateSongDisplay(); }
